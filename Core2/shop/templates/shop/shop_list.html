@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% include "shop/_model.html" %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <div class="col-sm-3">
+                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            </div>
+            <div class="col-sm-8">
+                <div class="media-body">
+                    <h2 class="account-heading">{{ user.username }}</h2>
+                    <p class="text-secondary">{{ user.email }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-section">
+        <div class="row">
+            <div class="col-3">
+                <h2>Shops</h2>
+            </div>
+            <div class="col-3">
+                <button class="create-book btn btn-primary" type="button" name="button">Add Shop</button>
+            </div>
+        </div>
+        <ul>
+            {% for shop in object_list %}
+                <li>{{ shop.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $(".create-book").modalForm({
+        formURL: "{% url 'create-shop' %}"
+    });
+
+});
+</script>
+{% endblock %}
